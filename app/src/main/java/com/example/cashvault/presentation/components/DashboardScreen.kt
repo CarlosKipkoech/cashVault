@@ -16,6 +16,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -25,6 +27,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -51,9 +54,9 @@ fun DashboardScreen() {
 
         DepositWithdrawButtons()
 
-        creditCardSection()
+       // creditCardSection()
 
-        previousTransactionsSection()
+      //  previousTransactionsSection()
     }
 
 }
@@ -118,6 +121,24 @@ fun DepositWithdrawButtons() {
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
 
+        TransactionButton(
+            text = "Deposit" ,
+            icon = Icons.Default.KeyboardArrowDown,
+            backgroundColor = Color.DarkGray,
+            contentColor = Color.Black,
+            onButtonClick = { /*TODO*/ },
+            modifier = Modifier
+        )
+
+
+        TransactionButton(
+            text ="Withdraw" ,
+            icon = Icons.Default.KeyboardArrowUp,
+            backgroundColor = Color.DarkGray,
+            contentColor = Color.Black,
+            onButtonClick = { /*TODO*/ },
+            modifier =Modifier
+        )
     }
 
 }
