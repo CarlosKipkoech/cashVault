@@ -196,7 +196,7 @@ fun previousTransactionsSection(){
 
 
 
-//@Preview(showBackground = true)
+@Preview(showBackground = true)
 @Composable
 fun DashboardScreenPreview() {
     DashboardScreen()
