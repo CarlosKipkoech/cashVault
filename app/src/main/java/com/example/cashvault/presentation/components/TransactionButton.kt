@@ -31,7 +31,7 @@ fun TransactionButton(
 
     Button(
         modifier = modifier,
-        onClick = { onButtonClick },
+        onClick = { onButtonClick() },
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor,
             contentColor = contentColor
