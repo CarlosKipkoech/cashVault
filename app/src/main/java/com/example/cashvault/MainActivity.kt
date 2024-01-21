@@ -1,9 +1,11 @@
 package com.example.cashvault
 
-import TransactionItem
+import android.os.Build
+import com.example.cashvault.presentation.components.TransactionItem
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +16,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -27,15 +30,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.cashvault.presentation.components.TransactionButton
+import com.example.cashvault.presentation.components.TransactionDialog
 import com.example.cashvault.presentation.components.UserProfileSection
 import com.example.cashvault.presentation.components.WalletOverview
 import com.example.cashvault.presentation.components.WalletViewModel
 import com.example.cashvault.ui.theme.CashVaultTheme
 import com.example.cashvault.ui.theme.darkBlue
+import com.example.cashvault.ui.theme.darkGray
 import com.example.cashvault.ui.theme.white
 
 class MainActivity : ComponentActivity() {
@@ -44,11 +50,15 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
+            window.statusBarColor = darkBlue.toArgb()
+            window.navigationBarColor = darkBlue.toArgb()
+
             CashVaultTheme {
                 Box(
                     modifier = Modifier
                         .background(color = darkBlue)
                         .fillMaxSize()
+                        
                 ) {
                     Column(
                         modifier = Modifier
@@ -65,6 +75,8 @@ class MainActivity : ComponentActivity() {
                         DepositWithdrawButtons()
 
                         CreditCardSection()
+
+                        Spacer(modifier = Modifier.height(25.dp))
 
                         PreviousTransactionsSection()
                     }
@@ -124,7 +136,7 @@ class MainActivity : ComponentActivity() {
 
                 Text(
                     text = "Cards",
-                    color = Color.DarkGray,
+                    color = darkGray,
                     fontSize = 13.sp,
                 )
 
@@ -140,9 +152,16 @@ class MainActivity : ComponentActivity() {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Composable
-    fun PreviousTransactionsSection(){
+    fun PreviousTransactionsSection(
 
+    ){
+        Text(
+            text = "Transactions",
+            color = darkGray,
+            fontSize = 13.sp,
+        )
         LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
             itemsIndexed(walletViewModel.transactionList) { _, transaction ->
                 TransactionItem(
@@ -152,10 +171,30 @@ class MainActivity : ComponentActivity() {
                     date = transaction.date,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(white.copy(0.8f), RoundedCornerShape(25.dp))
-                        .padding(12.dp)
+                        .padding(10.dp)
                 )
             }
+        }
+
+
+        if (walletViewModel.dialogState.isOpen){
+
+            TransactionDialog(
+                onDismiss = {
+                    walletViewModel.onDismissDialog()
+                },
+                value = { walletViewModel.dialogState.inputValue },
+                onValueChange = {
+                    walletViewModel.onTransactionValueChange(it)
+                },
+                description = walletViewModel.dialogState.transactionType.toString(),
+                onConfirmButton = {
+                    walletViewModel.onTransactionConfirm()
+                },
+                isButtonEnabled = {
+                    walletViewModel.dialogState.isConfirmButtonEnabled
+                }
+            )
         }
 
     }

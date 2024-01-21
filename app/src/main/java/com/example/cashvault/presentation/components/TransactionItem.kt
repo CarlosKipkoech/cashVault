@@ -1,3 +1,5 @@
+package com.example.cashvault.presentation.components
+
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,10 +14,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.UiMode
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cashvault.R
+import com.example.cashvault.ui.theme.darkGray
 import com.example.cashvault.ui.theme.gray
 import com.example.cashvault.ui.theme.green
+import com.example.cashvault.ui.theme.white
 import com.example.cashvault.util.formatToPrice
 import java.util.Locale
 
@@ -40,11 +46,13 @@ fun TransactionItem(
             Text(
                 description,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp
+                color= white,
+                fontSize = 16.sp
             )
             Text(
                 date,
                 fontWeight = FontWeight.Thin,
+                color = darkGray,
                 fontSize = 13.sp
             )
         }
@@ -67,7 +75,6 @@ fun TransactionItemPreview() {
         date = "12.01.2023 11:15",
         modifier = Modifier
             .fillMaxWidth()
-            .background(gray.copy(0.2f), RoundedCornerShape(25.dp))
             .padding(12.dp)
     )
 }

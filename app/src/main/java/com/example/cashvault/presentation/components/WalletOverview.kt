@@ -21,6 +21,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.cashvault.ui.theme.darkGray
 import com.example.cashvault.ui.theme.white
 
 @Composable
@@ -47,7 +48,7 @@ fun WalletOverview(
 
                 Text(
                     text = "Balance",
-                    color = Color.DarkGray,
+                    color = darkGray,
                     fontSize = 13.sp,
                 )
 
@@ -58,21 +59,25 @@ fun WalletOverview(
                     Text(
                         "${valueBeforeComma()}",
                         fontSize = 35.sp,
+                        color = white,
                         fontWeight = FontWeight.Bold,
                     )
                     Text(
                         ",",
                         fontSize = 20.sp,
+                        color = white,
                         modifier = Modifier.offset(x = 0.dp, y = (-3.5).dp)
                     )
                     Text(
                         "%02d".format(valueAfterComma()),
                         fontSize = 20.sp,
+                        color = white,
                         modifier = Modifier.offset(x = 0.dp, y = (-3.5).dp)
                     )
                     Text(
                         "€",
                         fontSize = 18.sp,
+                        color = white,
                         modifier = Modifier.offset(x = 0.dp, y = (-3.5).dp)
                     )
                 }

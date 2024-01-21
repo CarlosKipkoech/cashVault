@@ -1,5 +1,8 @@
 package com.example.cashvault.presentation.components
 
+import android.annotation.SuppressLint
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -12,6 +15,8 @@ import com.example.cashvault.presentation.state.TransactionUIItem
 import com.example.cashvault.presentation.types.TransactionType
 import com.example.cashvault.ui.theme.green
 import com.example.cashvault.ui.theme.redOrange
+import java.text.SimpleDateFormat
+import java.time.format.DateTimeFormatter
 import java.util.Date
 import kotlin.math.absoluteValue
 import kotlin.math.roundToInt
@@ -53,17 +58,21 @@ class WalletViewModel: ViewModel() {
         dialogState = dialogState.copy(isConfirmButtonEnabled = validationResult)
     }
 
+    @SuppressLint("SimpleDateFormat")
+    @RequiresApi(Build.VERSION_CODES.O)
     fun onTransactionConfirm() {
         val factor = if (dialogState.transactionType == TransactionType.Withdraw) -1 else 1
         val transactionFloatValue = dialogState.inputValue.toFloatOrNull()?.times(factor) ?: return
 
         val timestamp = System.currentTimeMillis()
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
         val date = Date(timestamp)
+
 
         val transactionUiItem = TransactionUIItem(
             description = if(dialogState.transactionType == TransactionType.Withdraw) "Withdraw" else "Deposit",
             amount = transactionFloatValue,
-            date = date.toString(),
+            date = formatter.format(date).toString(),
             color = if(dialogState.transactionType == TransactionType.Withdraw) redOrange else green
         )
         transactionList.add(transactionUiItem)
