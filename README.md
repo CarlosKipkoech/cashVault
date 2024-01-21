@@ -1,6 +1,7 @@
 # CashVault - Android Wallet App
 
-![CashVault Screenshot](https://github.com/CarlosKipkoech/cashVault/assets/87478982/f70be7a7-fb48-42e9-8dba-c8dd7a9ad057)
+<img src="https://github.com/CarlosKipkoech/cashVault/assets/87478982/f70be7a7-fb48-42e9-8dba-c8dd7a9ad057" alt="CashVault Screenshot" width="300">
+
 
 ## Overview
 
