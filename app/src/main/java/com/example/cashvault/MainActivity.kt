@@ -30,7 +30,7 @@ class MainActivity : ComponentActivity() {
                         .background(color = darkBlue)
                         .fillMaxSize()
                 ) {
-  DashboardScreen()
+                    DashboardScreen()
                 }
             }
         }
